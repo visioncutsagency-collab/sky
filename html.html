@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyBound Works — Strategic Content Agency</title>
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/x-icon" href="file:///C:/Users/iman4312/Music/Website/assets/favicon.ico">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            50: '#EFF6FF',
+                            100: '#DBEAFE',
+                            200: '#BFDBFE',
+                            500: '#3B82F6',
+                            600: '#2563EB',
+                            700: '#1D4ED8',
+                            900: '#1E3A8A',
+                            accent: '#60A5FA',
+                            glow: 'rgba(59, 130, 246, 0.15)'
+                        }
+                    },
+                    boxShadow: {
+                        'glow-sm': '0 0 20px -5px rgba(59, 130, 246, 0.25)',
+                        'glow-lg': '0 0 50px -10px rgba(59, 130, 246, 0.3)',
+                        'glass': '0 8px 32px 0 rgba(15, 23, 42, 0.05)',
+                        'card-hover': '0 20px 40px -15px rgba(59, 130, 246, 0.12)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #0F172A;
+            overflow-x: hidden;
+        }
+
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .interactive-hover-card {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .interactive-hover-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* FAQ Accordion Transitions */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .accordion-item.active .icon-rotator {
+            transform: rotate(180deg);
+            color: #3B82F6;
+        }
+
+        .accordion-item.active {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.08);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8FAFC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 font-sans antialiased bg-grid-pattern">
+
+    <!-- 1. FLOATING NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 pt-4 px-4 sm:px-6 transition-all duration-300">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-5 py-3 rounded-full glass-pill shadow-glass">
+            <a href="#" class="flex items-center gap-2.5 group">
+                <img src="file:///C:/Users/iman4312/Music/Website/assets/logo.png" alt="SkyBound Works Logo" class="w-9 h-9 rounded-xl object-cover shadow-sm group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/36x36/1e293b/3b82f6?text=SW';">
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-slate-900 text-base tracking-tight group-hover:text-brand-500 transition-colors">SkyBound Works</span>
+                    <span class="text-[10px] text-slate-400 font-semibold tracking-wider uppercase -mt-1">Content Agency</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                <a href="#home" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-brand-500 hover:bg-slate-100/70 rounded-full transition-all">Home</a>
+                <a href="#services" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-brand-500 hover:bg-slate-100/70 rounded-full transition-all">Services</a>
+                <a href="#work" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-brand-500 hover:bg-slate-100/70 rounded-full transition-all">Our Work</a>
+                <a href="#approach" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-brand-500 hover:bg-slate-100/70 rounded-full transition-all">Approach</a>
+                <a href="#about" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-brand-500 hover:bg-slate-100/70 rounded-full transition-all">About</a>
+                <a href="#faq" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-brand-500 hover:bg-slate-100/70 rounded-full transition-all">FAQ</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="https://calendly.com/sky-bound/30min" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold tracking-wide hover:bg-brand-500 hover:shadow-glow-sm transition-all duration-300 transform hover:-translate-y-0.5">
+                    <span>Let's Talk</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+                
+                <button id="mobileMenuBtn" class="md:hidden w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-brand-500 transition-colors" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden max-w-6xl mx-auto mt-2 p-6 rounded-3xl glass-pill shadow-2xl flex-col gap-4 border border-slate-200/80 bg-white">
+            <a href="#home" class="mobile-link text-sm font-semibold text-slate-700 hover:text-brand-500 py-1 border-b border-slate-100">Home</a>
+            <a href="#services" class="mobile-link text-sm font-semibold text-slate-700 hover:text-brand-500 py-1 border-b border-slate-100">Services</a>
+            <a href="#work" class="mobile-link text-sm font-semibold text-slate-700 hover:text-brand-500 py-1 border-b border-slate-100">Our Work</a>
+            <a href="#approach" class="mobile-link text-sm font-semibold text-slate-700 hover:text-brand-500 py-1 border-b border-slate-100">Our Approach</a>
+            <a href="#about" class="mobile-link text-sm font-semibold text-slate-700 hover:text-brand-500 py-1 border-b border-slate-100">About</a>
+            <a href="#faq" class="mobile-link text-sm font-semibold text-slate-700 hover:text-brand-500 py-1 border-b border-slate-100">FAQ</a>
+            <a href="https://calendly.com/sky-bound/30min" target="_blank" class="mobile-link text-center py-3 rounded-full bg-brand-500 text-white font-bold text-xs shadow-md mt-2">Let's Talk About Your Business</a>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section id="home" class="relative pt-36 pb-24 md:pt-48 md:pb-36 overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-brand-100/50 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-3xl mx-auto space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-600 text-xs font-bold uppercase tracking-wider shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+                    STRATEGIC CONTENT AGENCY
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+                    <span class="block sm:inline whitespace-nowrap">Turn Attention Into Trust.</span>
+                    <span class="block sm:inline whitespace-nowrap text-gradient-blue">Turn Trust Into Customers.</span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+                    We help wellness, recovery, and service-based businesses use strategic content to educate their audience, communicate their value, and create more opportunities for customer acquisition.
+                </p>
+
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://calendly.com/sky-bound/30min" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-full bg-slate-900 text-white font-bold text-sm tracking-wide shadow-xl hover:bg-brand-600 hover:shadow-glow-lg transition-all duration-300 transform hover:-translate-y-1 text-center">
+                        Let's Talk About Your Business
+                    </a>
+                    <a href="#work" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-800 font-bold text-sm tracking-wide hover:bg-slate-50 transition-all duration-300 text-center shadow-sm">
+                        Explore Our Work <i class="fa-solid fa-arrow-right ml-2 text-xs text-brand-500"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. INTRODUCTION SECTION -->
+    <section class="py-24 bg-slate-50/60 border-y border-slate-200/60 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
+                <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-100/60 px-3 py-1 rounded-full">Our Core Philosophy</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    Content Should Do More Than Fill Your Feed.
+                </h2>
+                <p class="text-base sm:text-lg text-slate-600 leading-relaxed pt-2">
+                    Posting consistently without a strategic objective creates noise, not leverage. Real growth happens when every video, script, and article directly serves customer education and business acquisition.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="interactive-hover-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-6 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-sm">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Educate</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Demystify complex services, highlight benefits, and answer exact audience questions before they ever reach out.
+                    </p>
+                </div>
+
+                <div class="interactive-hover-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-6 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-sm">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Build Trust</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Position your brand as the undisputed authority through authentic messaging, high production, and expert narrative framing.
+                    </p>
+                </div>
+
+                <div class="interactive-hover-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-6 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-sm">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Drive Action</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Convert engaged viewers into booked appointments, loyal members, and high-value repeat customers smoothly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. THE PROBLEM SECTION -->
+    <section class="py-24 bg-white relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-bold text-rose-600 uppercase tracking-widest bg-rose-50 px-3 py-1 rounded-full">Common Bottlenecks</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Getting Attention Is Only the Beginning.
+                    </h2>
+                    <p class="text-base text-slate-600 leading-relaxed">
+                        Most businesses waste months creating random content that garners views but zero revenue. We eliminate the disconnect between creative media and sales pipeline.
+                    </p>
+                    <div class="p-6 rounded-2xl bg-slate-900 text-white space-y-3 shadow-xl">
+                        <div class="text-sm font-bold text-brand-400">The SkyBound Solution</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            We align creative execution directly with customer psychology to turn passive scrollers into high-intent inbound inquiries.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 grid grid-cols-1 gap-4">
+                    <div class="interactive-hover-card p-6 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex-shrink-0 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900 mb-1">Inconsistent Posting & Lack of Strategy</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Posting without a deliberate monthly narrative leads to scattered branding and wasted production effort.</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-hover-card p-6 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex-shrink-0 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900 mb-1">Low Conversion From Views to Clients</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Viral views mean nothing if the content fails to communicate clear value proposition or next steps.</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-hover-card p-6 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex-shrink-0 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-slate-900 mb-1">Complex Services Hard to Explain</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Wellness and recovery protocols often suffer from jargon overload that confuses prospective clients.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. OUR SERVICES SECTION -->
+    <section id="services" class="py-24 bg-slate-50/70 border-y border-slate-200/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-100/60 px-3 py-1 rounded-full">Tailored Solutions</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Our Services</h2>
+                <p class="text-slate-600 text-sm">End-to-end strategic content architecture designed to scale high-ticket service businesses.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="interactive-hover-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-4 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-sm">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">Content Strategy</h3>
+                        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                            Comprehensive content playbook aligned with business goals and buyer personas.
+                        </p>
+                        <ul class="space-y-1.5 mb-5 text-[11px] text-slate-700 font-medium border-t border-slate-100 pt-3">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Audience Positioning</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Keyword Research</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Editorial Roadmaps</li>
+                        </ul>
+                    </div>
+                    <a href="https://calendly.com/sky-bound/30min" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-700">
+                        Inquire <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="interactive-hover-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-4 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-sm">
+                            <i class="fa-solid fa-film"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">Short-Form Video</h3>
+                        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                            High-retention editing and script writing optimized for Reels, TikTok, and Shorts.
+                        </p>
+                        <ul class="space-y-1.5 mb-5 text-[11px] text-slate-700 font-medium border-t border-slate-100 pt-3">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Scripting & Hooks</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Dynamic Editing</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Multi-Format Export</li>
+                        </ul>
+                    </div>
+                    <a href="https://calendly.com/sky-bound/30min" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-700">
+                        Inquire <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="interactive-hover-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-4 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-sm">
+                            <i class="fa-solid fa-share-nodes"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">Organic Marketing</h3>
+                        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                            Systematic channel distribution to maximize organic reach and build authority.
+                        </p>
+                        <ul class="space-y-1.5 mb-5 text-[11px] text-slate-700 font-medium border-t border-slate-100 pt-3">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Multi-Platform Publish</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> SEO Copywriting</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Community Building</li>
+                        </ul>
+                    </div>
+                    <a href="https://calendly.com/sky-bound/30min" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-700">
+                        Inquire <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="interactive-hover-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-4 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-sm">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">Customer Acquisition</h3>
+                        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                            Connecting content directly to conversion mechanisms and booking funnels.
+                        </p>
+                        <ul class="space-y-1.5 mb-5 text-[11px] text-slate-700 font-medium border-t border-slate-100 pt-3">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Funnel Integration</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> CTA Optimization</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Pipeline Tracking</li>
+                        </ul>
+                    </div>
+                    <a href="https://calendly.com/sky-bound/30min" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-700">
+                        Inquire <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. INDUSTRIES WE SERVE -->
+    <section class="py-24 bg-white relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-100/60 px-3 py-1 rounded-full">Focused Expertise</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Built Around Your Business and Your Audience.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Wellness Card in Dark Theme with Zoom Badges -->
+                <div class="interactive-hover-card lg:col-span-7 bg-slate-900 rounded-3xl p-8 sm:p-10 text-white shadow-xl relative overflow-hidden flex flex-col justify-between border border-blue-500/30">
+                    <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-500/30 text-brand-300 text-xs font-bold uppercase mb-6">
+                            <i class="fa-solid fa-heart-pulse"></i> Specialized Niche Focus
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold mb-4">Wellness and Recovery</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-8">
+                            High-tech wellness and physical recovery businesses require specialized educational content that instills confidence and highlights clinical and experiential benefits.
+                        </p>
+
+                        <!-- Wellness Sub-tags with Zoom/Hover Effect -->
+                        <div class="flex flex-wrap gap-2.5 mb-8">
+                            <span class="interactive-hover-card px-3.5 py-2 rounded-xl bg-white/10 text-xs font-semibold border border-white/10 cursor-default">Wellness Studios</span>
+                            <span class="interactive-hover-card px-3.5 py-2 rounded-xl bg-white/10 text-xs font-semibold border border-white/10 cursor-default">Recovery Centers</span>
+                            <span class="interactive-hover-card px-3.5 py-2 rounded-xl bg-white/10 text-xs font-semibold border border-white/10 cursor-default">Cryotherapy Clinics</span>
+                            <span class="interactive-hover-card px-3.5 py-2 rounded-xl bg-white/10 text-xs font-semibold border border-white/10 cursor-default">Red-Light Therapy</span>
+                            <span class="interactive-hover-card px-3.5 py-2 rounded-xl bg-white/10 text-xs font-semibold border border-white/10 cursor-default">Infrared Saunas</span>
+                            <span class="interactive-hover-card px-3.5 py-2 rounded-xl bg-white/10 text-xs font-semibold border border-white/10 cursor-default">Compression Therapy</span>
+                            <span class="interactive-hover-card px-3.5 py-2 rounded-xl bg-white/10 text-xs font-semibold border border-white/10 cursor-default">Longevity Centers</span>
+                            <span class="interactive-hover-card px-3.5 py-2 rounded-xl bg-white/10 text-xs font-semibold border border-white/10 cursor-default">Med Spas</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                        <span>SkyBound Wellness Engine</span>
+                        <i class="fa-solid fa-shield-halved text-brand-400"></i>
+                    </div>
+                </div>
+
+                <!-- Secondary Card with Zoom Effect on Items -->
+                <div class="interactive-hover-card lg:col-span-5 bg-slate-50 rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 text-slate-700 text-xs font-bold uppercase mb-6">
+                            <i class="fa-solid fa-briefcase"></i> Broad Expertise
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Other Service-Based Businesses</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            We also partner with high-ticket service providers where customer trust, authority, and education drive buying decisions.
+                        </p>
+
+                        <div class="space-y-3 mb-8">
+                            <div class="interactive-hover-card p-3.5 rounded-xl bg-white border border-slate-200/60 flex items-center gap-3 text-xs font-semibold text-slate-800 shadow-2xs">
+                                <i class="fa-solid fa-user-doctor text-brand-500 text-sm"></i> Specialized Healthcare & Clinics
+                            </div>
+                            <div class="interactive-hover-card p-3.5 rounded-xl bg-white border border-slate-200/60 flex items-center gap-3 text-xs font-semibold text-slate-800 shadow-2xs">
+                                <i class="fa-solid fa-dumbbell text-brand-500 text-sm"></i> High-End Fitness & Performance
+                            </div>
+                            <div class="interactive-hover-card p-3.5 rounded-xl bg-white border border-slate-200/60 flex items-center gap-3 text-xs font-semibold text-slate-800 shadow-2xs">
+                                <i class="fa-solid fa-gem text-brand-500 text-sm"></i> B2B & Executive Consulting
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://calendly.com/sky-bound/30min" target="_blank" class="px-6 py-3 rounded-full bg-white border border-slate-300 text-slate-900 font-bold text-xs hover:bg-slate-100 transition-colors text-center shadow-xs">
+                        Discuss Your Niche
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. OUR APPROACH -->
+    <section id="approach" class="py-24 bg-slate-50/60 border-y border-slate-200/60 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-100/60 px-3 py-1 rounded-full">Process & Execution</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">How We Work Together</h2>
+                <p class="text-slate-600 text-sm">A structured 5-step roadmap built for predictable growth and flawless content execution.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <div class="interactive-hover-card bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="text-3xl font-extrabold text-brand-500 mb-4 font-mono">01</div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900">Understand</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Deep-dive into your brand, target audience, core services, and acquisition goals.</p>
+                </div>
+
+                <div class="interactive-hover-card bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="text-3xl font-extrabold text-brand-500 mb-4 font-mono">02</div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900">Strategize</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Develop custom content pillars, messaging angles, and monthly production schedules.</p>
+                </div>
+
+                <div class="interactive-hover-card bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="text-3xl font-extrabold text-brand-500 mb-4 font-mono">03</div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900">Create</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Scripting, high-retention video editing, graphic asset generation, and polishing.</p>
+                </div>
+
+                <div class="interactive-hover-card bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="text-3xl font-extrabold text-brand-500 mb-4 font-mono">04</div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900">Implement</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Strategic publishing, caption copywriting, multi-channel distribution, and scheduling.</p>
+                </div>
+
+                <div class="interactive-hover-card bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="text-3xl font-extrabold text-brand-500 mb-4 font-mono">05</div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900">Refine</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Analyze retention, audience engagement, conversion feedback, and iterate strategy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. OUR WORK & CASE STUDIES -->
+    <section id="work" class="py-24 bg-white relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-100/60 px-3 py-1 rounded-full">Portfolio Showcase</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-3">Our Work & Case Studies</h2>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="portfolioFilters">
+                    <button class="filter-btn active px-4 py-2 rounded-full text-xs font-bold bg-slate-900 text-white transition-all shadow-sm" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-filter="wellness">Wellness & Recovery</button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-filter="educational">Educational</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="portfolioGrid">
+                <div class="interactive-hover-card portfolio-item wellness group bg-slate-50 rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm">
+                    <div class="relative h-64 bg-slate-900 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop" alt="Cryotherapy" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-bold uppercase">Cryotherapy</div>
+                        <button class="w-14 h-14 rounded-full bg-brand-500 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-xs font-bold text-brand-600 mb-1">+185% Appointment Bookings</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Demystifying Cryo-Therapy for New Clients</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Short-form educational series addressing client anxieties and outlining benefits.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-hover-card portfolio-item educational wellness group bg-slate-50 rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm">
+                    <div class="relative h-64 bg-slate-900 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop" alt="Longevity Studio" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-bold uppercase">Longevity</div>
+                        <button class="w-14 h-14 rounded-full bg-brand-500 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-xs font-bold text-brand-600 mb-1">3.2M Organic Impressions</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Infrared Sauna & Red-Light Protocol Guide</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">High-retention video strategy mapping infrared cellular benefits.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-hover-card portfolio-item educational group bg-slate-50 rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm">
+                    <div class="relative h-64 bg-slate-900 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop" alt="Performance" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-bold uppercase">Performance</div>
+                        <button class="w-14 h-14 rounded-full bg-brand-500 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-xs font-bold text-brand-600 mb-1">2.4x Inbound Consultations</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Compression Therapy & Athlete Recovery</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Strategic hook & value video editing driving direct lead acquisition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. ABOUT US (FOUNDER AMEER) -->
+    <section id="about" class="py-24 bg-slate-50/60 border-t border-slate-200/60 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="interactive-hover-card bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-4 text-center md:text-left">
+                    <div class="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto rounded-3xl overflow-hidden shadow-lg border-2 border-slate-100">
+                        <img src="file:///C:/Users/iman4312/Music/Website/assets/founder.jpg" alt="Ameer - Founder" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop';">
+                        <div class="absolute bottom-2 right-2 bg-slate-900 text-emerald-400 p-2 rounded-xl text-xs font-bold shadow-md">
+                            <i class="fa-solid fa-check-circle"></i> Founder
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-8 space-y-4">
+                    <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-100/60 px-3 py-1 rounded-full">Leadership</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Meet Ameer.</h2>
+                    
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        I'm Ameer, the founder of Skybound Works.
+                    </p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        My focus is on the strategy behind content: understanding the audience, identifying what potential customers need to know, and developing content that communicates a business's value more effectively.
+                    </p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        I believe content should have a clear purpose beyond simply keeping social media active. It should help businesses educate their audiences, communicate their strengths, build credibility, and support their wider marketing objectives.
+                    </p>
+                    <p class="text-sm text-slate-900 font-bold leading-relaxed pt-1">
+                        Through Skybound Works, I work with businesses to bring strategic thinking and creative execution together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FREQUENTLY ASKED QUESTIONS -->
+    <section id="faq" class="py-32 bg-white relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-32">
+                    <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-100/60 px-3.5 py-1.5 rounded-full">Clear Answers</span>
+                    <h2 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Frequently Asked Questions</h2>
+                    <p class="text-slate-600 text-base leading-relaxed">
+                        Everything you need to know about partnering with SkyBound Works to build your elite content engine. Have more questions? Feel free to reach out directly through our contact form.
+                    </p>
+                    <div class="pt-2">
+                        <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-900 text-white font-bold text-xs hover:bg-brand-500 transition-all shadow-md">
+                            <span>Ask a Question</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-4" id="faqAccordion">
+                    <div class="interactive-hover-card accordion-item rounded-2xl border border-slate-200 bg-slate-50/50 p-6 transition-all cursor-pointer">
+                        <div class="accordion-header flex items-center justify-between gap-4">
+                            <h3 class="text-base font-bold text-slate-900">Q1. What types of businesses do you work with?</h3>
+                            <i class="fa-solid fa-chevron-down icon-rotator text-slate-400 text-sm transition-transform duration-300"></i>
+                        </div>
+                        <div class="accordion-content pt-3 text-sm text-slate-600 leading-relaxed">
+                            We primarily focus on wellness and recovery businesses while also working with other suitable service-based businesses that need strategic content and marketing support.
+                        </div>
+                    </div>
+
+                    <div class="interactive-hover-card accordion-item rounded-2xl border border-slate-200 bg-slate-50/50 p-6 transition-all cursor-pointer">
+                        <div class="accordion-header flex items-center justify-between gap-4">
+                            <h3 class="text-base font-bold text-slate-900">Q2. Do you provide video editing?</h3>
+                            <i class="fa-solid fa-chevron-down icon-rotator text-slate-400 text-sm transition-transform duration-300"></i>
+                        </div>
+                        <div class="accordion-content pt-3 text-sm text-slate-600 leading-relaxed">
+                            Yes. Short-form video editing and production can be part of our services, alongside content strategy, planning, scripting, and creative direction.
+                        </div>
+                    </div>
+
+                    <div class="interactive-hover-card accordion-item rounded-2xl border border-slate-200 bg-slate-50/50 p-6 transition-all cursor-pointer">
+                        <div class="accordion-header flex items-center justify-between gap-4">
+                            <h3 class="text-base font-bold text-slate-900">Q3. Do you develop content strategies?</h3>
+                            <i class="fa-solid fa-chevron-down icon-rotator text-slate-400 text-sm transition-transform duration-300"></i>
+                        </div>
+                        <div class="accordion-content pt-3 text-sm text-slate-600 leading-relaxed">
+                            Yes. Content strategy can include audience research, messaging, content pillars, planning, and ideas aligned with business objectives.
+                        </div>
+                    </div>
+
+                    <div class="interactive-hover-card accordion-item rounded-2xl border border-slate-200 bg-slate-50/50 p-6 transition-all cursor-pointer">
+                        <div class="accordion-header flex items-center justify-between gap-4">
+                            <h3 class="text-base font-bold text-slate-900">Q4. Do you guarantee leads or sales?</h3>
+                            <i class="fa-solid fa-chevron-down icon-rotator text-slate-400 text-sm transition-transform duration-300"></i>
+                        </div>
+                        <div class="accordion-content pt-3 text-sm text-slate-600 leading-relaxed">
+                            No. Results depend on multiple factors, including the offer, market, audience, budget, sales process, and implementation. Our focus is on developing and improving content and marketing approaches that support business objectives.
+                        </div>
+                    </div>
+
+                    <div class="interactive-hover-card accordion-item rounded-2xl border border-slate-200 bg-slate-50/50 p-6 transition-all cursor-pointer">
+                        <div class="accordion-header flex items-center justify-between gap-4">
+                            <h3 class="text-base font-bold text-slate-900">Q5. Can you work with our existing footage?</h3>
+                            <i class="fa-solid fa-chevron-down icon-rotator text-slate-400 text-sm transition-transform duration-300"></i>
+                        </div>
+                        <div class="accordion-content pt-3 text-sm text-slate-600 leading-relaxed">
+                            Yes, provided the footage is suitable for the agreed content plan and production requirements.
+                        </div>
+                    </div>
+
+                    <div class="interactive-hover-card accordion-item rounded-2xl border border-slate-200 bg-slate-50/50 p-6 transition-all cursor-pointer">
+                        <div class="accordion-header flex items-center justify-between gap-4">
+                            <h3 class="text-base font-bold text-slate-900">Q6. How much do your services cost?</h3>
+                            <i class="fa-solid fa-chevron-down icon-rotator text-slate-400 text-sm transition-transform duration-300"></i>
+                        </div>
+                        <div class="accordion-content pt-3 text-sm text-slate-600 leading-relaxed">
+                            The scope and investment depend on the business's requirements, deliverables, and level of involvement. Contact us to discuss your needs.
+                        </div>
+                    </div>
+
+                    <div class="interactive-hover-card accordion-item rounded-2xl border border-slate-200 bg-slate-50/50 p-6 transition-all cursor-pointer">
+                        <div class="accordion-header flex items-center justify-between gap-4">
+                            <h3 class="text-base font-bold text-slate-900">Q7. How do we get started?</h3>
+                            <i class="fa-solid fa-chevron-down icon-rotator text-slate-400 text-sm transition-transform duration-300"></i>
+                        </div>
+                        <div class="accordion-content pt-3 text-sm text-slate-600 leading-relaxed">
+                            Submit an inquiry through our contact form with information about your business and what you want to improve.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. CONTACT US SECTION -->
+    <section id="contact" class="py-24 bg-slate-50/60 border-t border-slate-200/60 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-100/60 px-3 py-1 rounded-full">Get In Touch</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Let's Talk About Your Business.
+                    </h2>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Ready to elevate your content strategy and convert passive attention into high-value clients? Fill out the form, or reach us directly.
+                    </p>
+
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center gap-3 text-xs text-slate-700">
+                            <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <span>Response within 24 business hours</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-slate-700">
+                            <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <a href="mailto:hello@skyboundworks.com" class="hover:text-brand-600 transition-colors font-semibold">hello@skyboundworks.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-hover-card lg:col-span-7 bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+                                <input type="text" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Business Email *</label>
+                                <input type="email" required placeholder="john@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-brand-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Company Name *</label>
+                                <input type="text" required placeholder="Apex Wellness" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Website or Social Link</label>
+                                <input type="url" placeholder="instagram.com/brand" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-brand-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Business Goals & Details</label>
+                            <textarea rows="3" placeholder="Tell us about your acquisition targets..." class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-brand-500 resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-brand-600 transition-all shadow-md flex items-center justify-center gap-2">
+                            <span>Send Inquiry</span>
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </form>
+
+                    <div id="formSuccess" class="hidden text-center py-12 space-y-4">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900">Inquiry Received!</h3>
+                        <p class="text-xs text-slate-600 max-w-sm mx-auto">
+                            Thank you for reaching out to SkyBound Works. Ameer or a senior team member will get back to you within 24 business hours.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. FOOTER SECTION (Updated with Social Links, Calendly, & Email) -->
+    <footer id="socials" class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800/80">
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="file:///C:/Users/iman4312/Music/Website/assets/logo.png" alt="SkyBound Works Logo" class="w-9 h-9 rounded-xl object-cover shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/36x36/1e293b/3b82f6?text=SW';">
+                        <span class="text-white font-extrabold text-lg tracking-tight">SkyBound Works</span>
+                    </div>
+                    <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+                        Building the world's most elite high-retention content engines for global coaches and founders.
+                    </p>
+                    
+                    <!-- Social Media Icons with Links -->
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="https://www.instagram.com/_ameerzaada_/" target="_blank" class="w-9 h-9 rounded-xl bg-slate-900 text-slate-300 hover:bg-brand-500 hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/112011251/" target="_blank" class="w-9 h-9 rounded-xl bg-slate-900 text-slate-300 hover:bg-brand-500 hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="https://www.facebook.com/people/Ameer-Abdullah/100064840355178/" target="_blank" class="w-9 h-9 rounded-xl bg-slate-900 text-slate-300 hover:bg-brand-500 hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Company</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#work" class="hover:text-white transition-colors">Portfolio</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Contact & Support</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="https://calendly.com/sky-bound/30min" target="_blank" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-calendar-check text-brand-400"></i> Book a Call (Calendly)</a></li>
+                        <li><a href="mailto:hello@skyboundworks.com" class="hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-envelope text-brand-400"></i> hello@skyboundworks.com</a></li>
+                        <li><a href="#socials" class="hover:text-white transition-colors">Social Profiles</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>© 2026 SkyBound Works. All Rights Reserved.</p>
+                <div class="flex items-center gap-4">
+                    <span class="hover:text-slate-400 transition-colors cursor-pointer">Privacy Policy</span>
+                    <span>•</span>
+                    <span class="hover:text-slate-400 transition-colors cursor-pointer">Terms of Service</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+
+        // FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.accordion-item');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+        if (faqItems.length > 0) faqItems[0].classList.add('active');
+
+        // Portfolio Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-slate-900', 'text-white');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
+                });
+                btn.classList.remove('bg-slate-100', 'text-slate-600');
+                btn.classList.add('bg-slate-900', 'text-white');
+
+                const filter = btn.getAttribute('data-filter');
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            contactForm.classList.add('hidden');
+            formSuccess.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
